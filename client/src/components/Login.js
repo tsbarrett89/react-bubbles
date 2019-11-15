@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-import axiosWithAuth from '../utils/axiosWithAuth';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 
-const Login = () => {
+const Login = props => {
   // make a post request to retrieve a token from the api
   const [credentials, setCredentials] = useState({
     username: '',
@@ -19,7 +19,7 @@ const Login = () => {
             .then(response => {
                 console.log(response);
                 localStorage.setItem('token', response.data.payload);
-                props.history.push('/friendsList')
+                props.history.push('/BubblePage')
             })
             .catch(err => console.log(err));
   }
@@ -33,16 +33,17 @@ const Login = () => {
           type='text'
           name='username'
           placeholder='username'
-          onChange={handleSubmit}
+          onChange={handleChanges}
           value={credentials.username}
         />
         <input 
           type='password'
           name='password'
           placeholder='password'
-          onChange={handleSubmit}
+          onChange={handleChanges}
           value={credentials.password}
         />
+        <button>Log In</button>
       </form>
     </>
   );
